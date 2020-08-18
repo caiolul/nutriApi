@@ -1,11 +1,13 @@
 # NutriAPI
+
 Api for NutriJess, platform of nutritionists and health professionals
 
-
 # Models
+
     Models relation
 
 ## Patient
+
     name
     sex
     age
@@ -15,6 +17,7 @@ Api for NutriJess, platform of nutritionists and health professionals
     reason
 
 ## ReportPatien
+
     problemPatient
     weight
     height

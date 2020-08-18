@@ -24,31 +24,31 @@ class ReportPatient {
     @JoinColumn({ name: 'patient_id' })
     patient: Patient;
 
-    @Column()
+    @Column('float') // Change types for float
     weight: number;
 
-    @Column()
+    @Column('float')
     height: number;
 
     @Column()
     nivelFsica: string;
 
-    @Column()
+    @Column('float')
     cc: number;
 
-    @Column()
+    @Column('float')
     cq: number;
 
-    @Column()
+    @Column('float')
     porcentFat: number;
 
-    @Column()
+    @Column('float')
     tmbValue: number;
 
-    @Column()
+    @Column('float')
     imcValue: number;
 
-    @Column()
+    @Column('float')
     vetValue: number;
 
     @Column('text')

@@ -1,5 +1,8 @@
 import { getRepository } from 'typeorm';
 import ReportPatient from '../models/ReportPatient';
+import TmbResult from '../util/TmbFunction';
+import VetResult from '../util/VetFunction';
+import ImcResult from '../util/ImcFunction';
 
 interface Request {
     problemPatient: string;
@@ -9,9 +12,6 @@ interface Request {
     cc: number;
     cq: number;
     porcentFat: number;
-    tmbValue: number;
-    vetValue: number;
-    imcValue: number;
     medication: string;
     patient_id: string;
 }
@@ -25,9 +25,6 @@ class CreateReportPatientServices {
         cc,
         cq,
         porcentFat,
-        tmbValue,
-        vetValue,
-        imcValue,
         medication,
         patient_id,
     }: Request): Promise<ReportPatient> {
@@ -39,6 +36,7 @@ class CreateReportPatientServices {
             throw new Error('Report already exists...');
         }
         const report = dataReport.create({
+            patient_id,
             medication,
             problemPatient,
             height,
@@ -47,9 +45,12 @@ class CreateReportPatientServices {
             cq,
             nivelFsica,
             porcentFat,
-            tmbValue,
-            vetValue,
-            imcValue,
+            tmbValue: TmbResult(problemPatient, nivelFsica, weight),
+            vetValue: VetResult(
+                TmbResult(problemPatient, nivelFsica, weight),
+                nivelFsica,
+            ),
+            imcValue: ImcResult(weight, height),
         });
         await dataReport.save(report);
         return report;
