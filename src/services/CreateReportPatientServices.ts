@@ -3,6 +3,7 @@ import ReportPatient from '../models/ReportPatient';
 import TmbResult from '../util/TmbFunction';
 import VetResult from '../util/VetFunction';
 import ImcResult from '../util/ImcFunction';
+import Patient from '../models/Patient';
 
 interface Request {
     problemPatient: string;
@@ -35,6 +36,14 @@ class CreateReportPatientServices {
         if (checkPatient) {
             throw new Error('Report already exists...');
         }
+        // query for seach sex in patient
+        const {sex} = await getRepository(Patient)
+            .createQueryBuilder("patient")
+            .select("sex", "sex")
+            .where("patient.id = :id", { id: patient_id })
+            .getRawOne();
+
+        console.log(sex);
         const report = dataReport.create({
             patient_id,
             medication,
@@ -45,9 +54,9 @@ class CreateReportPatientServices {
             cq,
             nivelFsica,
             porcentFat,
-            tmbValue: TmbResult(problemPatient, nivelFsica, weight),
+            tmbValue: TmbResult(sex, nivelFsica, weight),
             vetValue: VetResult(
-                TmbResult(problemPatient, nivelFsica, weight),
+                TmbResult(sex, nivelFsica, weight),
                 nivelFsica,
             ),
             imcValue: ImcResult(weight, height),

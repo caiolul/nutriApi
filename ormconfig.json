@@ -3,7 +3,7 @@
     "host": "localhost",
     "port": 5432,
     "username": "postgres",
-    "password": "passnutri",
+    "password": "56caio7021",
     "database": "nutri",
     "entities": [
         "./src/models/*.ts"
