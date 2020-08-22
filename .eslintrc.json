@@ -23,7 +23,7 @@
         "class-methods-use-this": "off",
         "no-shadow": "off",
         "camelcase": "off", //working
-       // "@typescript-eslint/camelcase": "off", not working
+       // "@typescript-eslint/camelcase": "off", // not working
         "import/extensions": [
             "error",
             "ignorePackages",
