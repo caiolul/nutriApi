@@ -1,14 +1,9 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
 import EmailValidator from 'email-validator';
 import { getRepository } from 'typeorm';
-import multer from 'multer';
-import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 import CreateUsersServices from '../services/CreateUsersServices';
-import AvatarUpdateServices from '../services/AvatarUpdateServices';
 import User from '../models/Users';
-import uploadConf from '../config/update';
 
-const update = multer(uploadConf);
 const userRoutes = Router();
 
 interface Types {
@@ -42,26 +37,26 @@ userRoutes.post('/add', async (request, response) => {
     }
 });
 
-userRoutes.patch(
-    '/avatar',
-    ensureAuthenticated,
-    update.single('avatar'),
-    async (req: Request, res: Response) => {
-        try {
-            const avatarUpdate = new AvatarUpdateServices();
-            // eslint-disable-next-line no-console
-            console.log(req.userTypes);
-            // const { id } = req.user;
-            const user = await avatarUpdate.execute({
-                userId: req.userTypes.id,
-                avatarName: req.file.filename,
-            });
+// userRoutes.patch(
+//     '/avatar',
+//     ensureAuthenticated,
+//     update.single('avatar'),
+//     async (req: Request, res: Response) => {
+//         try {
+//             const avatarUpdate = new AvatarUpdateServices();
+//             // eslint-disable-next-line no-console
+//             console.log(req.userTypes);
+//             // const { id } = req.user;
+//             const user = await avatarUpdate.execute({
+//                 userId: req.userTypes.id,
+//                 avatarName: req.file.filename,
+//             });
 
-            return res.json(user);
-        } catch (error) {
-            return res.status(400).json({ error: error.message });
-        }
-    },
-);
+//             return res.json(user);
+//         } catch (error) {
+//             return res.status(400).json({ error: error.message });
+//         }
+//     },
+// );
 
 export default userRoutes;
