@@ -9,4 +9,5 @@ routes.use('/user', userRoutes);
 routes.use('/patient', patientRoutes);
 routes.use('/session', sessionRoutes);
 
+
 export default routes;
