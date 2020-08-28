@@ -17,7 +17,7 @@ class CreateUsersServices {
         if (checkEmail) {
             throw new Error('Email already exists...');
         }
-        const hashPass = await hash(password, 8);
+        const hashPass = await hash(password, 12);
         const user = userRepo.create({
             name,
             email,
