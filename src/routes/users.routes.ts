@@ -10,12 +10,11 @@ interface Types {
     id: string;
 }
 // Route working only for testing
-
-// userRoutes.get('/', async (request, response) => {
-//     const userRepo = getRepository(User);
-//     const users = await userRepo.find();
-//     return response.json(users);
-// });
+userRoutes.get('/', async (request, response) => {
+     const userRepo = getRepository(User);
+     const users = await userRepo.find();
+     return response.json(users);
+});
 
 userRoutes.post('/add', async (request, response) => {
     try {

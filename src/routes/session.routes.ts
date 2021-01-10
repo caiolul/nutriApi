@@ -18,9 +18,9 @@ sessionRoutes.post('/', async (request, response) => {
 
             return response.json({ user, token });
         }
-        return response.status(400).json({ error: 'Email Invalid ' });
+        return response.status(401).json({ error: 'Email Invalid ' });
     } catch (err) {
-        return response.status(400).json({ error: err.message });
+        return response.status(401).json({ error: err.message });
     }
 });
 
